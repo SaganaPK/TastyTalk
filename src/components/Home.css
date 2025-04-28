@@ -1,0 +1,26 @@
+.feed-container {
+    max-width: 800px; /* Max width on desktop */
+    width: 100%; /* Always take 100% on mobile */
+    margin: 0 auto; /* Center horizontally */
+    padding: 20px;
+  }
+  
+  .feed-heading {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  @media (max-width: 600px) {
+    .feed-heading {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+  
+    .feed-container {
+      padding: 15px;
+    }
+  }
+  
+  

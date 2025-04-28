@@ -1,0 +1,44 @@
+.register-container {
+    width: 300px;
+    margin: 100px auto;
+    background: #f1f1f1;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  .register-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .register-container button {
+    width: 100%;
+    padding: 10px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 600px) {
+    .register-container {
+      width: 90%;
+      margin: 50px auto;
+      padding: 20px;
+    }
+  
+    .register-container input {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    .register-container button {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  

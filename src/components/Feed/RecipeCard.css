@@ -1,0 +1,116 @@
+
+.recipe-card {
+    position: relative; /* 🔥 Add this */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  .author-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  .dish-title {
+    font-size: 22px;
+    color: #222;
+    margin: 8px 0;
+  }
+  
+  .dish-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    margin: 15px 0;
+    border-radius: 10px;
+  }
+  
+  .dish-description {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+  }
+
+  .ingredients-section {
+    margin-top: 10px;
+  }
+  
+  .ingredients-section h4 {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .ingredients-list {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .ingredients-list li {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 4px;
+  }
+  
+  
+  /* Move delete button to top-right */
+  .delete-button {
+    position: absolute; /* 🔥 absolute positioning */
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .delete-button:hover {
+    background-color: #e60000;
+  }
+  
+  @media (max-width: 600px) {
+    .recipe-card {
+      padding: 15px;
+    }
+  
+    .author-name {
+      font-size: 16px;
+    }
+  
+    .dish-title {
+      font-size: 20px;
+    }
+  
+    .dish-image {
+      max-height: 200px;
+    }
+  
+    .dish-description {
+      font-size: 14px;
+    }
+  
+    .ingredients-section h4 {
+      font-size: 14px;
+    }
+  
+    .ingredients-list li {
+      font-size: 12px;
+    }
+  
+    .delete-button {
+      padding: 5px 8px;
+      font-size: 14px;
+    }
+  }
+  
+
+  

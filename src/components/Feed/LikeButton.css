@@ -1,0 +1,36 @@
+.like-section {
+    margin-top: 10px;
+  }
+  
+  .like-button {
+    padding: 8px 16px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .like-button:hover {
+    background-color: #ff1a1a;
+  }
+  
+  .likes-count {
+    margin-top: 5px;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  @media (max-width: 600px) {
+    .like-button {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  
+    .likes-count {
+      font-size: 12px;
+    }
+  }
+  
