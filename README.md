@@ -53,11 +53,13 @@ TastyTalks is a **social media platform for food lovers** to share, explore, and
    git clone https://github.com/SaganaPK/TastyTalk.git
 
 2. Install dependencies:
+
     npm install
 
-3.Configure Firebase (add your Firebase config to firebase.js)
+3. Configure Firebase (add your Firebase config to firebase.js)
 
-4.Run the project:
+4. Run the project:
+
     npm start
 
 🌟 Future Enhancements :
