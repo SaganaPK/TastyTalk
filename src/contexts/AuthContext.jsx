@@ -10,42 +10,47 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        try {
-          const userDocRef = doc(db, 'talkusers', user.uid); // 🔥 Note: from talkusers
-          const userDoc = await getDoc(userDocRef);
-
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            setCurrentUser({
-              uid: user.uid,
-              email: user.email,
-              username: userData.username, // 🔥 Correct username
-            });
-          } else {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      const fetchUserData = async () => {
+        if (user) {
+          try {
+            const userDocRef = doc(db, 'talkusers', user.uid);
+            const userDoc = await getDoc(userDocRef);
+  
+            if (userDoc.exists()) {
+              const userData = userDoc.data();
+              setCurrentUser({
+                uid: user.uid,
+                email: user.email,
+                username: userData.username,
+              });
+            } else {
+              setCurrentUser({
+                uid: user.uid,
+                email: user.email,
+                username: 'UnknownUser',
+              });
+            }
+          } catch (error) {
+            console.error('Error fetching user document:', error);
             setCurrentUser({
               uid: user.uid,
               email: user.email,
               username: 'UnknownUser',
             });
           }
-        } catch (error) {
-          console.error('Error fetching user document:', error);
-          setCurrentUser({
-            uid: user.uid,
-            email: user.email,
-            username: 'UnknownUser',
-          });
+        } else {
+          setCurrentUser(null);
         }
-      } else {
-        setCurrentUser(null);
-      }
-      setLoading(false);
+        setLoading(false);
+      };
+  
+      fetchUserData(); // 🔥 call async inside
     });
-
-    return unsubscribe;
+  
+    return () => unsubscribe();
   }, []);
+  
 
   return (
     <AuthContext.Provider value={{ currentUser, loading }}>

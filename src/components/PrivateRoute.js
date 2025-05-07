@@ -3,9 +3,11 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 const PrivateRoute = ({ children }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, loading } = useContext(AuthContext);
 
- // console.log("Current User inside PrivateRoute:", currentUser); // Debug line
+  if (loading) {
+    return null; // or spinner if you want
+  }
 
   return currentUser ? children : <Navigate to="/" />;
 };
