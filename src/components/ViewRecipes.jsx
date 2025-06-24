@@ -12,24 +12,44 @@ const ViewRecipes = () => {
 
   useEffect(() => {
     const fetchQuickRecipes = async () => {
-      try {
-        const q = query(collection(db, 'recipes'), orderBy('createdAt', 'desc'));
-        const querySnapshot = await getDocs(q);
-        const recipesList = querySnapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          .filter((recipe) => recipe.imageUrl === ''); // 🔥 Only quick recipes
+  try {
+    // 🔥 1. Get quick recipes from 'recipes' collection
+    const q1 = query(collection(db, 'recipes'), orderBy('createdAt', 'desc'));
+    const snapshot1 = await getDocs(q1);
+    const quickRecipes = snapshot1.docs
+      .map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }))
+      .filter((recipe) => recipe.imageUrl === '');
 
-        setQuickRecipes(recipesList);
-        setFilteredRecipes(recipesList); // Show all initially
-      } catch (error) {
-        console.error('Error fetching recipes:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // 🤖 2. Get AI recipes from 'AI-recipes' collection
+    const q2 = query(collection(db, 'AI-recipes'), orderBy('createdAt', 'desc'));
+    const snapshot2 = await getDocs(q2);
+    const aiRecipes = snapshot2.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+  // 🧠 3. Combine both
+const combined = [...quickRecipes, ...aiRecipes];
+
+// 📅 4. Sort by createdAt (if needed)
+combined.sort((a, b) => {
+  const timeA = a.createdAt?.toDate?.() || new Date();
+  const timeB = b.createdAt?.toDate?.() || new Date();
+  return timeB - timeA;
+});
+
+setQuickRecipes(combined);
+setFilteredRecipes(combined); // Show all initially
+setLoading(false); // ✅ Fix added here
+
+  } catch (error) {
+    console.error('❌ Error fetching recipes:', error);
+  }
+};
+
 
     fetchQuickRecipes();
   }, []);
@@ -81,17 +101,24 @@ const ViewRecipes = () => {
 
       {filteredRecipes.length > 0 ? (
         filteredRecipes.map((recipe) => (
-          <div key={recipe.id} className="quick-recipe-card">
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-            {recipe.ingredients && recipe.ingredients.length > 0 && (
-              <ul>
-                {recipe.ingredients.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            )}
-          </div>
+         <div key={recipe.id} className="quick-recipe-card">
+  <h3 className="recipe-title">{recipe.title}</h3>
+
+  {recipe.ingredients && recipe.ingredients.length > 0 && (
+    <>
+      <h4>Ingredients You’ll Need:</h4>
+      <ul>
+        {recipe.ingredients.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h4>How to Make It:</h4>
+  <p>{recipe.description}</p>
+</div>
+
         ))
       ) : (
         <p>No matching quick recipes found.</p>

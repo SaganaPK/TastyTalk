@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, where, query} from 'firebase/firestore';
 import RecipeCard from './Feed/RecipeCard';
 import './Home.css';
 
@@ -10,7 +10,8 @@ const Home = () => {
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const querySnapshot = await getDocs(collection(db, 'recipes'));
+      const q = query(collection(db, 'recipes'), where('isAI', '==', false));
+      const querySnapshot = await getDocs(q);
       const recipesData = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),

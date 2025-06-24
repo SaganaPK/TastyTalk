@@ -40,6 +40,7 @@ const PostRecipe = () => {
         imageUrl: image, // 🔥 Base64 string saved
         authorId: currentUser.uid,
         authorUsername: currentUser.username,
+        isAI: false,
         createdAt: serverTimestamp(),
         likes: [],
         comments: [],

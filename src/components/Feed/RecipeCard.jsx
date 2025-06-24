@@ -4,7 +4,9 @@ import CommentSection from './CommentSection';
 import './RecipeCard.css';
 
 const RecipeCard = ({ recipe, username, setRecipes, onDelete }) => {
+  
   return (
+
     <div className="recipe-card">
         {onDelete && (
         <button className="delete-button" onClick={() => onDelete(recipe.id)}>
