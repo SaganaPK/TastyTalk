@@ -1,0 +1,130 @@
+.recipe-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 2rem;
+}
+
+.recipe-tile {
+  background-color: #00bf93;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  padding: 2rem 1rem;
+  transition: background 0.3s;
+  text-decoration: none;
+}
+
+.recipe-tile:hover {
+  background-color: #009775;
+}
+
+.recipe-title-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+}
+
+.recipe-tile {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: #00bf93;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.recipe-tile:hover {
+  transform: scale(1.05);
+  background-color: #f0fdfb;
+}
+
+.recipe-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.recipe-tile {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+.recipe-tile:hover {
+  transform: scale(1.03);
+  background-color: #f6fdfa;
+}
+
+.recipe-tile h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #00bf93;
+}
+
+.tile-author {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.tile-likes {
+  font-size: 0.8rem;
+  color: #ff5a5f;
+  margin-top: 6px;
+}
+.recipe-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.recipe-tile {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+.recipe-tile:hover {
+  transform: scale(1.03);
+  background-color: #f6fdfa;
+}
+
+.recipe-tile h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #00bf93;
+}
+
+.tile-author {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.tile-likes {
+  font-size: 0.8rem;
+  color: #ff5a5f;
+  margin-top: 6px;
+}

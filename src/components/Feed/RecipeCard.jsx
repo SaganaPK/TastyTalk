@@ -14,10 +14,10 @@ const RecipeCard = ({ recipe, username, setRecipes, onDelete }) => {
         </button>
       )}
 <p className="author-name">
-  {username
-    ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
-    : 'Unknown User'}
-</p>      <h3 className="dish-title">{recipe.title}</h3>
+  {recipe.authorUsername
+    ? recipe.authorUsername.charAt(0).toUpperCase() + recipe.authorUsername.slice(1).toLowerCase()
+    : 'Unknown'}
+</p>     <h3 className="dish-title">{recipe.title}</h3>
 
       {recipe.imageUrl && (
         <img

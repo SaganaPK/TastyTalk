@@ -3,7 +3,7 @@ import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import './QuickRecipe.css';
+import './AddTastyNote.css';
 
 // 🔊 Clean and Format Speech Result
 const cleanAndAdd = (text, setter, format = 'line') => {
@@ -52,7 +52,7 @@ const startSpeechRecognition = (onResult) => {
   recognition.start();
 };
 
-const QuickRecipe = () => {
+const AddTastyNote = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [description, setDescription] = useState('');
@@ -84,7 +84,7 @@ const QuickRecipe = () => {
 
   return (
     <div className="quick-post-card">
-      <h2>Quick Post ✨</h2>
+      <h2>Add a Quick Bite to the Feed </h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -135,4 +135,4 @@ const QuickRecipe = () => {
   );
 };
 
-export default QuickRecipe;
+export default AddTastyNote;

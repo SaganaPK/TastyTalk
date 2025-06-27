@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs, where, query} from 'firebase/firestore';
-import RecipeCard from './Feed/RecipeCard';
+import RecipeCard from '../components/Feed/RecipeCard';
 import './Home.css';
 
 const Home = () => {

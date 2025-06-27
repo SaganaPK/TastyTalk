@@ -1,0 +1,42 @@
+.main-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+/* Left Sidebar */
+.sidebar-left {
+  width: 220px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* Center Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Right Sidebar */
+.sidebar-right {
+  width: 250px;
+  background-color: #fafafa;
+  border-left: 1px solid #ddd;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* Right Widget Box */
+.right-widget {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}

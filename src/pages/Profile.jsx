@@ -3,7 +3,7 @@ import { collection, query, where, getDocs, orderBy, doc, deleteDoc } from 'fire
 import { useAuth } from '../contexts/AuthContext';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebase';
-import RecipeCard from './Feed/RecipeCard';
+import RecipeCard from '../components/Feed/RecipeCard';
 import './Profile.css';
 
 const Profile = () => {

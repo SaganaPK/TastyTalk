@@ -1,0 +1,41 @@
+.ai-recipe-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 191, 147, 0.1);
+  transition: transform 0.2s;
+}
+
+.ai-recipe-card:hover {
+  transform: translateY(-4px);
+}
+
+.ai-recipe-card h3 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.ai-recipe-meta {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+.ai-recipe-card h4 {
+  margin-top: 1rem;
+  color: #00bf93;
+}
+
+.ai-recipe-card ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1rem;
+}
+
+.ai-recipe-card li {
+  line-height: 1.4;
+}
+
+.ai-recipe-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}

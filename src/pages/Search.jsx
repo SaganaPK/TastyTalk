@@ -54,13 +54,13 @@ const Search = () => {
 
   return (
     <div className="search-container">
-      <h2 className="search-heading">Search Users 👤</h2>
+      <h2 className="search-heading">Looking for tasty creators? 👤</h2>
 
       {/* 🔥 Live Typing Search */}
       <div className="search-form">
         <input
           type="text"
-          placeholder="Type username..."
+          placeholder="Search foodies, chefs, or creators…"
           value={searchText}
           onChange={handleSearch}
           className="search-input"
