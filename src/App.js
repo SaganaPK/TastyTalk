@@ -12,15 +12,14 @@ import Profile from './pages/Profile';
 import AddTastyNote from './pages/AddTastyNote';
 import TastyDiscoveries from './pages/TastyDiscoveries';
 import Search from './pages/Search';
-import RecipeDetail from './pages/RecipeDetail';
 import MainLayout from './layouts/MainLayout';
 import PrivateRoute from './PrivateRoute';
-import RecipeCard from './components/Feed/RecipeCard';
 import QuickBites from './pages/suggestrecipe/QuickBites';
 import CalorieSmart from './pages/suggestrecipe/CalorieSmart';
 import KidsFavorites from './pages/suggestrecipe/KidsFavorites';
 import SweetTooth from './pages/suggestrecipe/SweetTooth';
 import RecipeSuggester from './pages/suggestrecipe/RecipeSuggester';
+import RecipeDetail from './pages/RecipeDetail';
 
 function App() {
   return (
@@ -119,6 +118,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/recipe/:id"
           element={
@@ -129,7 +129,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/recipe/:id" element={<RecipeCard />} />
+
         <Route
           path="/suggest/quickbites"
           element={

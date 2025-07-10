@@ -12,7 +12,7 @@
 .quick-post-card h2 {
   margin-bottom: 1rem;
   font-size: 1.8rem;
-  color: #ff7e5f;
+  color: #333;
   font-weight: 600;
 }
 
@@ -36,7 +36,6 @@
 .quick-post-card input:focus,
 .quick-post-card textarea:focus {
   outline: none;
-  border-color:  #ff7e5f;
   box-shadow: 0 0 0 2px rgba(0, 191, 147, 0.1);
 }
 
@@ -66,7 +65,7 @@
 }
 
 .quick-post-card button[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #00BF93;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -78,5 +77,5 @@
 }
 
 .quick-post-card button[type="submit"]:hover {
-  background-color:  #419444;
+  background-color:  #009b78;
 }

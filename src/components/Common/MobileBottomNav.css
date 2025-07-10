@@ -1,0 +1,35 @@
+.mobile-bottom-nav {
+  display: none; /* hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .mobile-bottom-nav a {
+    color: #555;
+    text-decoration: none;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-bottom-nav a.active {
+    color: #ff7e5f;
+  }
+  .bottom-nav {
+    display: none;
+  
+}}

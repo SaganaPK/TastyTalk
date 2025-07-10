@@ -1,87 +1,39 @@
+.user-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.user-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s ease;
+  border: 1px solid #eee;
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.user-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #00BF93;
+}
+
+.user-card p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
 .search-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    text-align: center;
-    min-height: 100vh; 
-  }
-  
-  .search-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #ff7f50;
-  }
-  
-  .search-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .search-input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-  }
-  
-  .search-button {
-    padding: 10px 20px;
-    background-color: #ff7f50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .search-button:hover {
-    background-color: #ff5722;
-  }
-  
-  .search-results {
-    margin-top: 20px;
-  }
-  
-  .search-user {
-    margin-bottom: 10px;
-  }
-  
-  .search-link {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-  }
-  
-  .search-link:hover {
-    text-decoration: underline;
-  }
-  
-  @media (max-width: 600px) {
-    .search-form {
-      flex-direction: column;
-      gap: 8px;
-    }
-  
-    .search-input {
-      font-size: 14px;
-      padding: 8px;
-    }
-  
-    .search-button {
-      width: 100%;
-      font-size: 14px;
-      padding: 10px;
-    }
-  
-    .search-heading {
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-  
-    .search-link {
-      font-size: 16px;
-    }
-  }
-  
+  padding-bottom: 100px; 
+}

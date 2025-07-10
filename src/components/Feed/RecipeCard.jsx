@@ -1,30 +1,26 @@
+/* ---------- RecipeCard.jsx ---------- */
 import React from 'react';
 import LikeButton from './LikeButton';
 import CommentSection from './CommentSection';
 import './RecipeCard.css';
 
 const RecipeCard = ({ recipe, username, setRecipes, onDelete }) => {
-  
   return (
-
     <div className="recipe-card">
-        {onDelete && (
+      {onDelete && (
         <button className="delete-button" onClick={() => onDelete(recipe.id)}>
           🗑️
         </button>
       )}
-<p className="author-name">
-  {recipe.authorUsername
-    ? recipe.authorUsername.charAt(0).toUpperCase() + recipe.authorUsername.slice(1).toLowerCase()
-    : 'Unknown'}
-</p>     <h3 className="dish-title">{recipe.title}</h3>
+      <p className="author-name">
+        {username
+          ? username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
+          : 'Unknown'}
+      </p>
+      <h3 className="dish-title">{recipe.title}</h3>
 
       {recipe.imageUrl && (
-        <img
-          src={recipe.imageUrl}
-          alt={recipe.title}
-          className="dish-image"
-        />
+        <img src={recipe.imageUrl} alt={recipe.title} className="dish-image" />
       )}
 
       {recipe.ingredients && recipe.ingredients.length > 0 && (
@@ -37,9 +33,15 @@ const RecipeCard = ({ recipe, username, setRecipes, onDelete }) => {
           </ul>
         </div>
       )}
+
       <p className="dish-description">{recipe.description}</p>
-      <LikeButton recipe={recipe} setRecipes={setRecipes} />
-      <CommentSection recipe={recipe} setRecipes={setRecipes} />
+
+      {setRecipes && (
+        <>
+          <LikeButton recipe={recipe} setRecipes={setRecipes} />
+          <CommentSection recipe={recipe} setRecipes={setRecipes} />
+        </>
+      )}
     </div>
   );
 };

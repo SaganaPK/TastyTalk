@@ -3,6 +3,7 @@
   max-width: 900px;
   margin: auto;
   font-family: 'Segoe UI', sans-serif;
+  padding-bottom: 100px; 
 }
 .quick-title {
   font-size: 2rem;

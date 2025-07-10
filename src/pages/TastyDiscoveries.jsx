@@ -16,17 +16,20 @@ const TastyDiscoveries = () => {
   useEffect(() => {
     const fetchQuickRecipes = async () => {
       try {
-        // Fetch quick recipes
+        // 🔥 Fetch recipes
         const q1 = query(collection(db, 'recipes'), orderBy('createdAt', 'desc'));
         const snapshot1 = await getDocs(q1);
         const quick = snapshot1.docs
-          .map(doc => ({ id: doc.id, ...doc.data() }))
+          .map(doc => ({ id: doc.id, ...doc.data(), collection: 'recipes' }))
           .filter(r => r.imageUrl === '');
 
-        // Fetch AI recipes
         const q2 = query(collection(db, 'AI-recipes'), orderBy('createdAt', 'desc'));
         const snapshot2 = await getDocs(q2);
-        const ai = snapshot2.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const ai = snapshot2.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          collection: 'AI-recipes',
+        }));
 
         const combined = [...quick, ...ai].sort((a, b) => {
           const timeA = a.createdAt?.toDate?.() || new Date();
@@ -34,7 +37,7 @@ const TastyDiscoveries = () => {
           return timeB - timeA;
         });
 
-        // Fetch usernames
+        // 🧠 Get usernames
         const userSnap = await getDocs(collection(db, 'talkusers'));
         const userMap = {};
         userSnap.forEach(doc => {
@@ -66,8 +69,6 @@ const TastyDiscoveries = () => {
     const filtered = quickRecipes.filter(recipe => {
       const title = recipe.title?.toLowerCase() || '';
       const ingredients = recipe.ingredients?.join(' ').toLowerCase() || '';
-      console.log("🧠 Recipe Username Debug:", recipe.title, recipe.authorUsername);
-
       return (
         title.includes(text) ||
         ingredients.includes(text) ||
@@ -85,7 +86,6 @@ const TastyDiscoveries = () => {
     <div className="discover-container">
       <h2 className="discover-heading">Dive Into Taste 🍽️</h2>
 
-      {/* 🔍 Search */}
       <div className="search-form">
         <input
           type="text"
@@ -96,15 +96,16 @@ const TastyDiscoveries = () => {
         />
       </div>
 
-      {/* 🧱 Grid of Recipe Tiles */}
       <div className="recipe-tile-grid">
         {filteredRecipes.map(recipe => {
           const username =
             recipe.authorUsername && recipe.authorUsername.trim() !== ''
               ? recipe.authorUsername
               : recipe.isAI
-                ? 'ChefBot'
-                : usernames[recipe.authorId] || 'Unknown'; const likeCount = recipe.likes?.length || 0;
+              ? 'ChefBot'
+              : usernames[recipe.authorId] || 'Unknown';
+
+          const likeCount = recipe.likes?.length || 0;
 
           return (
             <div

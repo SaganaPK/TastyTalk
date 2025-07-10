@@ -1,38 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
-import levenshtein from 'fast-levenshtein'; // 🔥 Import Levenshtein
+import levenshtein from 'fast-levenshtein';
 import './Search.css';
 
 const Search = () => {
   const [searchText, setSearchText] = useState('');
   const [allUsers, setAllUsers] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [userPostCounts, setUserPostCounts] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // 🔥 Fetch all users once when page loads
+  // 🔥 Fetch all users + post counts
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsersAndPosts = async () => {
       setLoading(true);
       try {
-        const usersRef = collection(db, 'talkusers');
-        const snapshot = await getDocs(usersRef);
-        const usersList = snapshot.docs.map(doc => ({
+        const usersSnapshot = await getDocs(collection(db, 'talkusers'));
+        const users = usersSnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setAllUsers(usersList);
+        setAllUsers(users);
+
+        // 🔥 Fetch post counts
+        const recipesSnapshot = await getDocs(collection(db, 'recipes'));
+        const postCountMap = {};
+        recipesSnapshot.docs.forEach((doc) => {
+          const authorId = doc.data().authorId;
+          if (authorId) {
+            postCountMap[authorId] = (postCountMap[authorId] || 0) + 1;
+          }
+        });
+        setUserPostCounts(postCountMap);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching users or posts:', error);
       }
       setLoading(false);
     };
 
-    fetchUsers();
+    fetchUsersAndPosts();
   }, []);
 
-  // 🔥 When user types, handle search
   const handleSearch = (e) => {
     const text = e.target.value.toLowerCase();
     setSearchText(text);
@@ -43,20 +53,20 @@ const Search = () => {
     }
 
     const matches = allUsers.filter(user => {
-        const username = user.username?.toLowerCase() || '';
-        const dist = levenshtein.get(username, text); // 🔥 Use .get
-        return dist <= 2 || username.includes(text);
-      });
-      
+      const username = user.username?.toLowerCase() || '';
+      const dist = levenshtein.get(username, text);
+      return dist <= 2 || username.includes(text);
+    });
 
     setSearchResults(matches);
   };
+
+  const usersToDisplay = searchText ? searchResults : allUsers;
 
   return (
     <div className="search-container">
       <h2 className="search-heading">Looking for tasty creators? 👤</h2>
 
-      {/* 🔥 Live Typing Search */}
       <div className="search-form">
         <input
           type="text"
@@ -69,19 +79,18 @@ const Search = () => {
 
       {loading && <p>Loading users...</p>}
 
-      <div className="search-results">
-        {searchResults.length > 0 ? (
-          searchResults.map(user => (
-            <div key={user.id} className="search-user">
-              <Link to={`/profile/${user.uid}`} className="search-link">
-                {user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase()}
-              </Link>
-            </div>
-          ))
-        ) : (
-          !loading && searchText.trim() && <p>No users found.</p>
-        )}
+      <div className="user-cards-grid">
+        {usersToDisplay.map((user) => (
+          <Link to={`/profile/${user.uid}`} key={user.id} className="user-card">
+            <h3>{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</h3>
+            <p>{userPostCounts[user.uid] || 0} posts shared</p>
+          </Link>
+        ))}
       </div>
+
+      {!loading && usersToDisplay.length === 0 && searchText.trim() && (
+        <p>No users found.</p>
+      )}
     </div>
   );
 };

@@ -2,27 +2,29 @@
   display: flex;
   height: 100vh;
   background-color: #f9f9f9;
+  position: relative;
 }
 
-/* Left Sidebar */
+/* ------- Desktop Layout ------- */
 .sidebar-left {
   width: 220px;
   background-color: #fff;
   border-right: 1px solid #ddd;
-  padding: 1rem;
+  padding: 0;
   position: sticky;
   top: 0;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Center Main Content */
-.main-content {
+.sidebar-scroll {
   flex: 1;
-  padding: 2rem;
   overflow-y: auto;
+  padding: 1rem;
 }
 
-/* Right Sidebar */
+
 .sidebar-right {
   width: 250px;
   background-color: #fafafa;
@@ -33,10 +35,106 @@
   height: 100vh;
 }
 
-/* Right Widget Box */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  padding-bottom: 90px; 
+
+}
+
 .right-widget {
   background: #fff;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ------- Mobile Only ------- */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-left,
+  .sidebar-right {
+    display: none;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  /* Toggle Button for Right Sidebar (Top Right) */
+  .options-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #00BF93;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 1001;
+    font-size: 14px;
+  }
+
+  /* Mobile Sidebar (Right) */
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .close-sidebar {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    float: right;
+    cursor: pointer;
+    color: #333;
+  }
+}
+
+@media (min-width: 769px) {
+  .options-toggle {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 80px; /* 👈 Make space for bottom nav */
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .bottom-nav a,
+  .bottom-nav button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+  }
+}
 }

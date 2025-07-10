@@ -41,7 +41,10 @@ const CommentSection = ({ recipe, setRecipes }) => {
       createdAt: new Date().toISOString() // 🔥 Local timestamp
     };
 
-    const recipeRef = doc(db, 'recipes', recipe.id);
+    const collectionName = recipe.isAI ? 'AI-recipes' : 'recipes';
+    const recipeRef = doc(db, collectionName, recipe.id)
+    
+
 
     await updateDoc(recipeRef, {
       comments: arrayUnion(newComment),

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth'; // ✅ Add signOut
 import { doc, getDoc } from 'firebase/firestore';
 
 export const AuthContext = createContext();
@@ -9,6 +9,16 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // ✅ Add logout function
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setCurrentUser(null);
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       const fetchUserData = async () => {
@@ -16,7 +26,7 @@ export function AuthProvider({ children }) {
           try {
             const userDocRef = doc(db, 'talkusers', user.uid);
             const userDoc = await getDoc(userDocRef);
-  
+
             if (userDoc.exists()) {
               const userData = userDoc.data();
               setCurrentUser({
@@ -44,16 +54,16 @@ export function AuthProvider({ children }) {
         }
         setLoading(false);
       };
-  
-      fetchUserData(); // 🔥 call async inside
+
+      fetchUserData();
     });
-  
+
     return () => unsubscribe();
   }, []);
-  
 
+  // ✅ Include logout in context
   return (
-    <AuthContext.Provider value={{ currentUser, loading }}>
+    <AuthContext.Provider value={{ currentUser, loading, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );

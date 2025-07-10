@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs, where, query} from 'firebase/firestore';
+import { collection, getDocs, where, query } from 'firebase/firestore';
 import RecipeCard from '../components/Feed/RecipeCard';
 import './Home.css';
 
@@ -34,7 +34,12 @@ const Home = () => {
     <div className="feed-container">
       <h2 className="feed-heading">TastyTalks 🍳 Recipe Feed</h2>
       {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} username={usernames[recipe.authorId]} setRecipes={setRecipes} />
+        <RecipeCard
+          key={recipe.id}
+          recipe={recipe}
+          username={usernames[recipe.authorId]}
+          setRecipes={setRecipes}
+        />
       ))}
     </div>
   );

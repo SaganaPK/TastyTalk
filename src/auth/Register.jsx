@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { serverTimestamp } from "firebase/firestore";
+import { getDocs, collection, query, where } from "firebase/firestore";
 import "./Register.css";
 
 function Register() {
@@ -12,37 +13,49 @@ function Register() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleRegister = async (e) => {
-        e.preventDefault();
+   const handleRegister = async (e) => {
+  e.preventDefault();
 
-        if (password !== confirmPassword) {
-            alert("Passwords don't match!");
-            return;
-        }
+  if (password !== confirmPassword) {
+    alert("Passwords don't match!");
+    return;
+  }
 
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
+  try {
+    // 🔍 Check if username exists (case-insensitive)
+    const usersRef = collection(db, "talkusers");
+    const q = query(usersRef, where("username", "==", username.toLowerCase()));
+    const snapshot = await getDocs(q);
 
-            // Save user details to Firestore
-            await setDoc(doc(db, "talkusers", user.uid), {
-                email: user.email,
-                username: username.toLowerCase(), 
-                uid: user.uid,
-                createdAt: serverTimestamp()
-            });
+    if (!snapshot.empty) {
+      alert("🚫 A chef already exists with this name. Please choose a unique name.");
+      return;
+    }
 
-            alert("Registered successfully!");
-            setUsername("");
-            setEmail("");
-            setPassword("");
-            setConfirmPassword("");
+    // 👤 Create user in Firebase Auth
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-        } catch (error) {
-            console.error("Registration Error:", error.message);
-            alert(error.message);
-        }
-    };
+    // 🗃️ Save user to Firestore
+    await setDoc(doc(db, "talkusers", user.uid), {
+      email: user.email,
+      username: username.toLowerCase(),
+      uid: user.uid,
+      createdAt: serverTimestamp(),
+    });
+
+    alert("✅ Registered successfully!");
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+
+  } catch (error) {
+    console.error("Registration Error:", error.message);
+    alert(error.message);
+  }
+};
+
 
     return (
         <div className="register-container">

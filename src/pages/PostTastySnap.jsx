@@ -13,10 +13,12 @@ const PostTastySnap = ({ onClose }) => {
   const [error, setError] = useState('');
 
   const handleOverlayClick = (e) => {
-    if (e.target.classList.contains('post-modal-overlay')) {
-      onClose();
-    }
-  };
+  console.log('Overlay clicked', e.target.classList);
+  if (e.target.classList.contains('post-modal-overlay')) {
+    console.log('Calling onClose',onClose);
+    onClose?.();
+  }
+};
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -49,7 +51,7 @@ const PostTastySnap = ({ onClose }) => {
         comments: [],
       });
 
-      onClose(); // Close modal on success
+      onClose?.();
     } catch (err) {
       console.error('Error posting recipe:', err);
       setError('Something went wrong');
@@ -59,7 +61,8 @@ const PostTastySnap = ({ onClose }) => {
   return (
     <div className="post-modal-overlay" onClick={handleOverlayClick}>
       <div className="post-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="post-close" onClick={onClose}>×</button>
+        <button className="post-close"   onClick={() => onClose?.()}>×</button>
+
 
         {step === 1 && (
           <>
@@ -81,7 +84,6 @@ const PostTastySnap = ({ onClose }) => {
               <button className="back-btn" onClick={() => setStep(1)}>←</button>
               <h3>Write About Your Dish ✍️</h3>
             </div>
-
             {image && <img src={image} alt="preview" className="preview-img" />}
             <input
               type="text"
