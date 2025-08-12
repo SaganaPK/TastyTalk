@@ -6,20 +6,20 @@ TastyTalks is a **social media platform for food lovers** to share, explore, and
 
 ## 🔐 Features
 
-- 🔑 User Authentication (Firebase Email/Password)
-- 🏠 Home Feed with Recipes
-- 📷 Post Recipe with Image
-- 📝 Quick Recipe (text-only)
-- 💡 Suggest Recipes based on ingredients
-- ❤️ Like & 💬 Comment on posts
-- 👤 View Your Profile and Delete Posts
-- 🔍 Search Other Users
-- 📚 View All Recipes (Search with Levenshtein logic)
-- 📱 Responsive Mobile Design
+-  User Authentication (Firebase Email/Password)
+-  Home Feed with Recipes
+-  Post Recipe with Image
+-  Quick Recipe (Voice-to-text integration for recipe posting)
+-  AI-powered recipe suggestions
+-  Like & 💬 Comment on posts
+-  View Your Profile and Delete Posts
+-  Search Other Users
+-  View All Recipes (Search with Levenshtein logic)
+-  Responsive Mobile Design
 
 ---
 
-## ⚙️ Tech Stack
+##  Tech Stack
 
 | Frontend | Backend | Auth | DB | Storage | Hosting | Version Control |
 |----------|---------|------|----|---------|---------|-----------------|
@@ -27,13 +27,13 @@ TastyTalks is a **social media platform for food lovers** to share, explore, and
 
 ---
 
-## 🗂️ High-Level Architecture
+##  High-Level Architecture
 
 ![Architecture](src/Assets/tastytalk-architecture.png)
 
 ---
 
-## 🧭 App Flow
+##  App Flow
 
 1. User logs in using email/password
 2. Lands on Home page with a global recipe feed
@@ -46,7 +46,7 @@ TastyTalks is a **social media platform for food lovers** to share, explore, and
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 1. Clone the repository:
 
@@ -62,15 +62,12 @@ TastyTalks is a **social media platform for food lovers** to share, explore, and
 
     npm start
 
-🌟 Future Enhancements :
+<< Future Enhancements :
+ 
 
-🧠 AI-powered recipe suggestions
+ Notifications for likes/comments
 
-🔔 Notifications for likes/comments
+ Multi-language recipe input (with translation to English)
 
-📦 Voice-to-text integration for recipe posting
-
-🌍 Multi-language recipe input (with translation to English)
-
-🧑‍🍳 Featured Chefs & Follow System
+ Featured Chefs & Follow System
 
