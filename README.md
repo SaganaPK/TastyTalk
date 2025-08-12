@@ -4,14 +4,14 @@ TastyTalks is a **social media platform for food lovers** to share, explore, and
 
 ---
 
-## 🔐 Features
+##  Features
 
 -  User Authentication (Firebase Email/Password)
 -  Home Feed with Recipes
 -  Post Recipe with Image
 -  Quick Recipe (Voice-to-text integration for recipe posting)
 -  AI-powered recipe suggestions
--  Like & 💬 Comment on posts
+-  Like & Comment on posts
 -  View Your Profile and Delete Posts
 -  Search Other Users
 -  View All Recipes (Search with Levenshtein logic)
