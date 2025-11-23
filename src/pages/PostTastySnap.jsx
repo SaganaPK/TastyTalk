@@ -3,6 +3,8 @@ import './PostTastySnap.css';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
+import imageCompression from 'browser-image-compression';
+
 
 const PostTastySnap = ({ onClose }) => {
   const { currentUser } = useAuth();
@@ -20,17 +22,34 @@ const PostTastySnap = ({ onClose }) => {
   }
 };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+const handleImageChange = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
+  try {
+    // Compression options
+    const options = {
+      maxSizeMB: 0.5,            // Target size (0.5MB)
+      maxWidthOrHeight: 1200,    // Resize to max 1200px
+      useWebWorker: true,
+    };
+
+    // Compress the image
+    const compressedFile = await imageCompression(file, options);
+
+    // Convert compressed file to Base64
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImage(reader.result);
+      setImage(reader.result); // Base64 output
       setStep(2);
     };
-    reader.readAsDataURL(file);
-  };
+    reader.readAsDataURL(compressedFile);
+
+  } catch (err) {
+    console.error("Image Compress Error:", err);
+    setError("Image upload failed. Try another photo.");
+  }
+};
 
   const handlePost = async () => {
     if (!title || !image) {

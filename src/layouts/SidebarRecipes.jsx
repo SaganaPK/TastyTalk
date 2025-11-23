@@ -15,9 +15,11 @@ const SidebarRecipes = () => {
         // 🥇 Fetch Top Liked Recipes
         const recipesSnap = await getDocs(collection(db, 'recipes'));
         const all = recipesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        const maxLikes = Math.max(...all.map(r => r.likes?.length || 0), 0);
-        const topLiked = all.filter(r => (r.likes?.length || 0) === maxLikes);
-        const randomTop = topLiked.sort(() => 0.5 - Math.random()).slice(0, 5);
+        const sorted = [...all].sort(
+          (a, b) => (b.likes?.length || 0) - (a.likes?.length || 0)
+        );
+        const top3 = sorted.slice(0, 5);
+        const randomTop = [...top3].sort(() => 0.5 - Math.random());
         setTopRecipes(randomTop);
 
         // 🤖 Fetch random AI suggestions
